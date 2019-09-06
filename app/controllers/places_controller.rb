@@ -1,6 +1,7 @@
 class PlacesController < ApplicationController
+  include Pagy::Backend
 
   def index
-    @places = Place.all
+    @pagy, @places = pagy(Place.all, page: params[:page], items: 2)
   end
 end
