@@ -69,7 +69,11 @@ gem 'jquery-rails'
 # Adding pagination
 gem 'pagy', '~> 3.5'
 
+#adding form functionality 
 gem 'simple_form'
+
+
+gem 'font-awesome-rails'
 
 
 source 'https://rails-assets.org' do
