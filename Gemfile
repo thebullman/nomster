@@ -69,8 +69,9 @@ gem 'jquery-rails'
 # Adding pagination
 gem 'pagy', '~> 3.5'
 
+gem 'simple_form'
+
+
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.3.3'
-
-
 end
