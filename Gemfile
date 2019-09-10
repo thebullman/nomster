@@ -73,6 +73,7 @@ gem 'pagy', '~> 3.5'
 gem 'simple_form'
 gem 'font-awesome-rails'
 gem 'devise'
+gem 'geocoder'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.3.3'
