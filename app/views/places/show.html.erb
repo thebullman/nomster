@@ -28,14 +28,15 @@
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYRMDQBONqi5chePOTi-nWX6q-c-Xoj4U&callback=initMap">
 </script>
 <div id="map"></div>
+<br />
 <% end %>
 
 <br />
 
   <div class="float-right">
       <% if current_user && current_user == @place.user %>
-        <%= link_to 'Edit', edit_place_path(@place), class: 'btn btn-primary' %>
-        <%= link_to 'Remove', place_path(@place), method: :delete, data: {confirm: 'Are you sure you want to delete this?'}, class: 'btn btn-danger' %>
+        <%= link_to 'Edit', edit_place_path(@place), class: 'btn-sm btn-primary' %>
+        <%= link_to 'Remove', place_path(@place), method: :delete, data: {confirm: 'Are you sure you want to delete this?'}, class: 'btn-sm btn-danger' %>
       <% end %>
   </div>
 </div>
@@ -67,11 +68,19 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYRMDQBONqi5chePOTi-nWX6q
 
 <div class="col-10 offset-1">
 <h1 class="float-left">Comments</h1>
+<% if current_user && current_user == @place.user %>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#imgModal">
+  Add Image
+</button>
+<div class="clear"></div>
+<% end %>
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary btn-lg float-right" data-toggle="modal" data-target="#myModal">
   Add Comment
 </button>
 </div>
+
 
 <div class="clear"></div>
 
@@ -88,3 +97,36 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYRMDQBONqi5chePOTi-nWX6q
     </div>
   <% end %>
 </div>
+
+
+<div class="modal" id="imgModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Image</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+          <%= simple_form_for @photo, url: place_photos_path(@place) do |f| %>
+          <div class="modal-body">
+          <%= f.input :picture %>
+          <%= f.input :caption %>      
+          </div>
+          <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <%= f.submit 'Add Image', class: 'btn btn-primary' %>
+        </div>
+      <% end %> 
+    </div>
+  </div>
+</div>
+
+
+<% @place.photos.each do |photo| %>
+      <%= image_tag(photo.picture.url) %>
+      <% if photo.caption.present? %>
+        <b><%= photo.caption %></b> -
+      <% end %>
+    <small><%= photo.user.email %></small>
+<% end  %>
