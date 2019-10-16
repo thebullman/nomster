@@ -46,14 +46,6 @@ class PlacesController < ApplicationController
     end
   end
 
-#  def add_image
-#   
-#
-#    if @place.user != current_user
-#      return render plain: 'Not Allowed', status: :forbidden
-#    end
-#  end    
-
   def destroy
     @place = Place.find(params[:id])
       if @place.user != current_user
